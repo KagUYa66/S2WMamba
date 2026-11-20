@@ -132,8 +132,13 @@ No test-time augmentation is used in any reported number.
 | `qb_ep240.pt`    | QuickBird   | 240 | 579,875 |
 
 The reported model for each sensor is the checkpoint with the best reduced-resolution
-test PSNR of its run; the same weights are used for both protocols. See
-`weights/README.md` for the download link.
+test PSNR of its run; the same weights are used for both protocols.
+
+**Download: https://github.com/KagUYa66/S2WMamba/releases/tag/v1.0**
+
+The release also carries the ends of the WorldView-3 epoch 400-500 sweep, so the
+range quoted in the paper can be checked against the weights themselves. The `.pt`
+files are not tracked in git (each is 8-11 MB); `weights/` holds only the notes.
 
 ---
 
