@@ -7,16 +7,15 @@ Download from the release page:
 | file | sensor | epoch | params | note |
 |---|---|---|---|---|
 | `wv3_ep460.pt` | WorldView-3 (8 bands) | 460 | 759,463 | **selected**, best reduced-resolution test PSNR of the run |
-| `gf2_ep490.pt` | GF2 (4 bands)         | 490 | 579,875 | **selected** |
-| `qb_ep240.pt`  | QuickBird (4 bands)   | 240 | 579,875 | **selected** |
-| `wv3_ep400.pt` / `wv3_ep500.pt` | WorldView-3 | 400 / 500 | 759,463 | ends of the epoch 400-500 sweep |
-| `gf2_ep400.pt` / `gf2_ep500.pt` | GF2 | 400 / 500 | 579,875 | ends of the sweep |
-| `qb_ep400.pt`  / `qb_ep500.pt`  | QuickBird | 400 / 500 | 579,875 | ends of the sweep |
+| `wv3_ep400.pt` | WorldView-3 | 400 | 759,463 | lower end of the epoch 400-500 sweep |
+| `wv3_ep500.pt` | WorldView-3 | 500 | 759,463 | upper end of the sweep |
+| `gf2_ep490.pt` | GF2 (4 bands) | 490 | 579,875 | **selected** |
+| `qb_ep240.pt`  | QuickBird (4 bands) | 240 | 579,875 | **selected** |
 
-The three `*_ep4xx/qb_ep240` files are the checkpoints the paper reports; the
-`ep400`/`ep500` pairs bracket the range quoted in Section IV-B (the choice of
-checkpoint moves the headline by at most 0.044 dB). The full sweep, every ten
-epochs from 400 to 500, is available from the authors on request.
+The three WorldView-3 files bracket the range quoted in Section IV-B: moving the
+checkpoint over epochs 400-500 changes the headline PSNR by at most 0.044 dB, and
+every value in that band still leads the strongest baseline. The GF2 and
+QuickBird sweeps are available from the authors on request.
 
 Each file is a dict with keys `model` (state dict), `opt`, `sched` and `epoch`;
 only `model` is needed for inference:
