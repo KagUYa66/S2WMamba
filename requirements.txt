@@ -1,0 +1,16 @@
+# Tested with PyTorch 1.x + CUDA on an RTX 5090.
+torch>=1.13
+einops>=0.6
+numpy>=1.23
+scipy>=1.9
+h5py>=3.7
+PyWavelets>=1.4
+opencv-python>=4.6
+torchinfo>=1.7
+
+# Requires a PATCHED build: bimamba_type='v6'/'v7' and the extra_emb argument are
+# not in the PyPI package. See README section 1.
+# mamba-ssm
+#
+# After installing the patched source, build the CUDA extensions:
+#   cd mamba_ssm && python setup.py install
