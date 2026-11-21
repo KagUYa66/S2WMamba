@@ -208,8 +208,8 @@ __marimo__/
 
 # project-specific
 runs/
-data/
-*.h5
+data/*.h5
+data/*.mat
 *.pt
 *.pth
 *.mat
