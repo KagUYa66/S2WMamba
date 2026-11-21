@@ -88,8 +88,8 @@ def main():
         print("wrote", out)
 
 
-def plot_val_psnr(out_dir, csv_path, selected=460):
-    """Validation PSNR against epoch, with the reported checkpoint marked."""
+def plot_test_psnr(out_dir, csv_path):
+    """Test-split PSNR against epoch for the 400-500 sweep."""
     if not os.path.exists(csv_path):
         print("missing", csv_path)
         return
@@ -99,25 +99,16 @@ def plot_val_psnr(out_dir, csv_path, selected=460):
             ep.append(int(row["epoch"]))
             psnr.append(float(row["psnr"]))
 
-    fig, ax = plt.subplots(figsize=(6.4, 3.4), dpi=200)
+    fig, ax = plt.subplots(figsize=(6.4, 3.2), dpi=200)
     fig.patch.set_facecolor(SURFACE)
     ax.set_facecolor(SURFACE)
 
-    ax.plot(ep, psnr, color=TRAIN_C, linewidth=2.0, solid_capstyle="round")
-    if selected in ep:
-        i = ep.index(selected)
-        ax.plot([ep[i]], [psnr[i]], marker="o", markersize=8, color=TRAIN_C,
-                markeredgecolor=SURFACE, markeredgewidth=2, zorder=5)
-        ax.annotate("reported checkpoint\n(epoch %d)" % selected,
-                    xy=(ep[i], psnr[i]), xytext=(-14, -46),
-                    textcoords="offset points", ha="right", fontsize=8,
-                    color=INK_2,
-                    arrowprops=dict(arrowstyle="-", color="#b8b7b2", linewidth=0.8,
-                                    shrinkA=2, shrinkB=4))
+    ax.plot(ep, psnr, color=TRAIN_C, linewidth=2.0, marker="o", markersize=4,
+            markeredgecolor=SURFACE, markeredgewidth=0, solid_capstyle="round")
 
     ax.set_xlabel("epoch", fontsize=9, color=INK_2)
-    ax.set_ylabel("validation PSNR (dB)", fontsize=9, color=INK_2)
-    ax.set_xlim(0, max(ep) * 1.05)
+    ax.set_ylabel("test PSNR (dB)", fontsize=9, color=INK_2)
+    ax.set_xlim(min(ep) - 8, max(ep) + 8)
     ax.tick_params(labelsize=8, colors=INK_2, length=3)
     for side in ("top", "right"):
         ax.spines[side].set_visible(False)
@@ -128,11 +119,11 @@ def plot_val_psnr(out_dir, csv_path, selected=460):
 
     fig.tight_layout()
     for ext in ("pdf", "png"):
-        path = os.path.join(out_dir, "wv3_val_psnr." + ext)
+        path = os.path.join(out_dir, "wv3_test_psnr." + ext)
         fig.savefig(path, facecolor=SURFACE)
         print("wrote", path)
 
 
 if __name__ == "__main__":
     main()
-    plot_val_psnr("figures", os.path.join("data", "wv3_val_psnr.csv"))
+    plot_test_psnr("figures", os.path.join("data", "wv3_rr_sweep.csv"))

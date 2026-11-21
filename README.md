@@ -135,18 +135,19 @@ PSNR (Section IV-B of the paper). The two curves are drawn by `plot_logs.py`; th
 validation values come from `tools/val_loss.py`, which evaluates every checkpoint
 on `valid_wv3.h5` — the split that is never used for gradient updates.
 
-The same evaluation gives the validation PSNR of every checkpoint
-(`data/wv3_val_psnr.csv`, produced by `eval_valid.py`):
+### Test-set PSNR over the sweep
 
-![validation PSNR](figures/wv3_val_psnr.png)
+The numbers behind the checkpoint-selection disclosure of Section IV-B, plotted from
+`data/wv3_rr_sweep.csv` (WorldView-3, reduced resolution, 20 test images, one point
+every ten epochs):
 
-The curve is flat after roughly epoch 300, and the last hundred epochs differ by
-hundredths of a dB: on this split the best checkpoint (epoch 480) is 0.007 dB above
-the one the paper reports (epoch 460). That is the same picture as the 400-500 band
-quoted in Section IV-B, and it is why the choice of checkpoint cannot move the
-headline by more than the stated 0.044 dB. Note that validation PSNR is about
-37.8 dB here against 39.5 dB on the reduced-resolution test split — the two splits
-contain different scenes and the numbers are not interchangeable.
+![test PSNR sweep](figures/wv3_test_psnr.png)
+
+The band spans 39.458-39.502 dB, i.e. 0.044 dB, which is what the paper says the
+choice of checkpoint is worth. Every point in it still leads the strongest baseline
+(FusionMamba at 39.374 dB), which is the second half of the claim. The endpoints of
+the sweep are published as checkpoints as well, so both statements can be recomputed
+rather than taken on trust.
 
 ---
 
