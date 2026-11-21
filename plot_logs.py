@@ -108,7 +108,7 @@ def plot_test_psnr(out_dir, csv_path):
 
     ax.set_xlabel("epoch", fontsize=9, color=INK_2)
     ax.set_ylabel("test PSNR (dB)", fontsize=9, color=INK_2)
-    ax.set_xlim(min(ep) - 8, max(ep) + 8)
+    ax.set_xlim(0, max(ep) * 1.05)
     ax.tick_params(labelsize=8, colors=INK_2, length=3)
     for side in ("top", "right"):
         ax.spines[side].set_visible(False)
@@ -126,4 +126,4 @@ def plot_test_psnr(out_dir, csv_path):
 
 if __name__ == "__main__":
     main()
-    plot_test_psnr("figures", os.path.join("data", "wv3_rr_sweep.csv"))
+    plot_test_psnr("figures", os.path.join("data", "wv3_test_psnr.csv"))

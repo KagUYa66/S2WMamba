@@ -137,17 +137,18 @@ on `valid_wv3.h5` — the split that is never used for gradient updates.
 
 ### Test-set PSNR over the sweep
 
-The numbers behind the checkpoint-selection disclosure of Section IV-B, plotted from
-`data/wv3_rr_sweep.csv` (WorldView-3, reduced resolution, 20 test images, one point
-every ten epochs):
+Test-split PSNR of **every** checkpoint of the WorldView-3 run — all fifty of them,
+one point every ten epochs, scored with the toolbox convention (30-px border,
+maxvalue 2047) and stored in `data/wv3_test_psnr.csv`:
 
 ![test PSNR sweep](figures/wv3_test_psnr.png)
 
-The band spans 39.458-39.502 dB, i.e. 0.044 dB, which is what the paper says the
-choice of checkpoint is worth. Every point in it still leads the strongest baseline
-(FusionMamba at 39.374 dB), which is the second half of the claim. The endpoints of
-the sweep are published as checkpoints as well, so both statements can be recomputed
-rather than taken on trust.
+The curve reaches its plateau around epoch 200 and then moves by hundredths of a dB:
+over the last hundred epochs (400-500) it spans 39.458-39.502 dB, i.e. **0.044 dB**,
+which is exactly what the paper says the choice of checkpoint is worth — and every
+point in that band still leads the strongest baseline (FusionMamba at 39.374 dB).
+Both statements can be recomputed from the released checkpoints rather than taken on
+trust: the two ends of the band are published alongside the reported model.
 
 ---
 
