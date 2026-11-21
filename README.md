@@ -123,6 +123,18 @@ What the training process sees, and what it does not:
 In short: the test split is used to *choose* among checkpoints of a run, never to
 *train* the model.
 
+### Training curve
+
+![training curve](figures/wv3_training_curve.png)
+
+Mean L1 loss over the WorldView-3 run, training (from `log.csv`) and validation
+(`data/wv3_val_loss.csv`) on a logarithmic axis. The validation curve stays just
+above the training curve and flattens with it: no divergence, no late-epoch
+degradation, which is why the last hundred epochs differ by hundredths of a dB in
+PSNR (Section IV-B of the paper). The two curves are drawn by `plot_logs.py`; the
+validation values come from `tools/val_loss.py`, which evaluates every checkpoint
+on `valid_wv3.h5` — the split that is never used for gradient updates.
+
 ---
 
 ## 4. Inference

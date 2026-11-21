@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Score training checkpoints on the official validation split.
+"""Score training checkpoints on the official validation split (PSNR).
 
-Select the checkpoint on validation PSNR, never on the test set.
+This is a validation-side check: it reports PSNR on `valid_*.h5`, not the training
+loss. Note that the checkpoints reported in the paper were selected on the
+reduced-resolution *test* split, as disclosed in Section IV-B of the paper; this
+script is provided so that the validation behaviour of a run can be inspected as
+well.
 
 Usage:
   python eval_valid.py --valid ../data/valid_wv3.h5 \
