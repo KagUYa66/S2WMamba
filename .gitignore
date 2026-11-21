@@ -213,3 +213,7 @@ data/*.mat
 *.pt
 *.pth
 *.mat
+
+# stray clones / raw downloads
+gh2/
+*.csv.raw
