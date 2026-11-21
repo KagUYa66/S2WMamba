@@ -100,6 +100,29 @@ reference, not as drop-in scripts.
 
 About 7 hours per WorldView-3 run on one RTX 5090.
 
+### Training data and checkpoint selection
+
+What the training process sees, and what it does not:
+
+- **Only the training split is used for gradient updates.** `train.py` reads
+  `train_<sensor>_slim.h5`, which holds the PanCollection training patches (9,714 for
+  WorldView-3). The test file (`test_<sensor>_multiExm1.h5`) is never opened during
+  training, so the model cannot be trained on test data.
+- **No test-time adaptation.** Inference is a single forward pass per image; there is
+  no fine-tuning, no per-image calibration, no augmentation and no test-time
+  ensembling. `--tta none` is the default and no reported number uses TTA.
+- **One seed per configuration** (seed 1). No seed or checkpoint ensembling is used.
+- **The reported checkpoint is the one with the best reduced-resolution test PSNR of
+  its run.** This is model selection on the test split, and it is disclosed in the
+  paper rather than hidden: Section IV-B quantifies it (moving the checkpoint over
+  epochs 400-500 changes the headline PSNR by at most 0.044 dB, and every value in
+  that band still leads the strongest baseline). The two ends of that band
+  (`*_ep400`, `*_ep500`) are in the release next to the selected checkpoint, so the
+  claim can be checked directly.
+
+In short: the test split is used to *choose* among checkpoints of a run, never to
+*train* the model.
+
 ---
 
 ## 4. Inference
