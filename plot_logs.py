@@ -88,5 +88,51 @@ def main():
         print("wrote", out)
 
 
+def plot_val_psnr(out_dir, csv_path, selected=460):
+    """Validation PSNR against epoch, with the reported checkpoint marked."""
+    if not os.path.exists(csv_path):
+        print("missing", csv_path)
+        return
+    ep, psnr = [], []
+    with open(csv_path, newline="") as fh:
+        for row in csv.DictReader(fh):
+            ep.append(int(row["epoch"]))
+            psnr.append(float(row["psnr"]))
+
+    fig, ax = plt.subplots(figsize=(6.4, 3.4), dpi=200)
+    fig.patch.set_facecolor(SURFACE)
+    ax.set_facecolor(SURFACE)
+
+    ax.plot(ep, psnr, color=TRAIN_C, linewidth=2.0, solid_capstyle="round")
+    if selected in ep:
+        i = ep.index(selected)
+        ax.plot([ep[i]], [psnr[i]], marker="o", markersize=8, color=TRAIN_C,
+                markeredgecolor=SURFACE, markeredgewidth=2, zorder=5)
+        ax.annotate("reported checkpoint\n(epoch %d)" % selected,
+                    xy=(ep[i], psnr[i]), xytext=(-14, -46),
+                    textcoords="offset points", ha="right", fontsize=8,
+                    color=INK_2,
+                    arrowprops=dict(arrowstyle="-", color="#b8b7b2", linewidth=0.8,
+                                    shrinkA=2, shrinkB=4))
+
+    ax.set_xlabel("epoch", fontsize=9, color=INK_2)
+    ax.set_ylabel("validation PSNR (dB)", fontsize=9, color=INK_2)
+    ax.set_xlim(0, max(ep) * 1.05)
+    ax.tick_params(labelsize=8, colors=INK_2, length=3)
+    for side in ("top", "right"):
+        ax.spines[side].set_visible(False)
+    for side in ("left", "bottom"):
+        ax.spines[side].set_color("#d8d7d2")
+    ax.grid(axis="y", color="#e8e7e2", linewidth=0.8)
+    ax.set_axisbelow(True)
+
+    fig.tight_layout()
+    for ext in ("pdf", "png"):
+        path = os.path.join(out_dir, "wv3_val_psnr." + ext)
+        fig.savefig(path, facecolor=SURFACE)
+        print("wrote", path)
+
+
 if __name__ == "__main__":
     main()
+    plot_val_psnr("figures", os.path.join("data", "wv3_val_psnr.csv"))

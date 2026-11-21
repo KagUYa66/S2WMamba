@@ -135,6 +135,19 @@ PSNR (Section IV-B of the paper). The two curves are drawn by `plot_logs.py`; th
 validation values come from `tools/val_loss.py`, which evaluates every checkpoint
 on `valid_wv3.h5` — the split that is never used for gradient updates.
 
+The same evaluation gives the validation PSNR of every checkpoint
+(`data/wv3_val_psnr.csv`, produced by `eval_valid.py`):
+
+![validation PSNR](figures/wv3_val_psnr.png)
+
+The curve is flat after roughly epoch 300, and the last hundred epochs differ by
+hundredths of a dB: on this split the best checkpoint (epoch 480) is 0.007 dB above
+the one the paper reports (epoch 460). That is the same picture as the 400-500 band
+quoted in Section IV-B, and it is why the choice of checkpoint cannot move the
+headline by more than the stated 0.044 dB. Note that validation PSNR is about
+37.8 dB here against 39.5 dB on the reduced-resolution test split — the two splits
+contain different scenes and the numbers are not interchangeable.
+
 ---
 
 ## 4. Inference
