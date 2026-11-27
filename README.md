@@ -177,7 +177,7 @@ No test-time augmentation is used in any reported number.
 
 | file | sensor | epoch | params |
 |---|---|---|---|
-| `wv3_ep460.pt`   | WorldView-3 | 460 | 759,463 |
+| `wv3_ep460.pt`   | WorldView-3 | 460 | 759,459 |
 | `gf2_ep490.pt`   | GF2         | 490 | 579,875 |
 | `qb_ep240.pt`    | QuickBird   | 240 | 579,875 |
 

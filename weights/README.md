@@ -6,9 +6,9 @@ Download from the release page:
 
 | file | sensor | epoch | params | note |
 |---|---|---|---|---|
-| `wv3_ep460.pt` | WorldView-3 (8 bands) | 460 | 759,463 | **selected**, best reduced-resolution test PSNR of the run |
-| `wv3_ep400.pt` | WorldView-3 | 400 | 759,463 | lower end of the epoch 400-500 sweep |
-| `wv3_ep500.pt` | WorldView-3 | 500 | 759,463 | upper end of the sweep |
+| `wv3_ep460.pt` | WorldView-3 (8 bands) | 460 | 759,459 | **selected**, best reduced-resolution test PSNR of the run |
+| `wv3_ep400.pt` | WorldView-3 | 400 | 759,459 | lower end of the epoch 400-500 sweep |
+| `wv3_ep500.pt` | WorldView-3 | 500 | 759,459 | upper end of the sweep |
 | `gf2_ep490.pt` | GF2 (4 bands) | 490 | 579,875 | **selected** |
 | `qb_ep240.pt`  | QuickBird (4 bands) | 240 | 579,875 | **selected** |
 
